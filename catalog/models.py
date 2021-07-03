@@ -11,7 +11,7 @@ class Book(models.Model):
     long_description =  models.CharField(max_length=560, default='My Long Description')
     short_description =  models.CharField(max_length=280, default='My Short Description')
     created_at = models.DateTimeField(auto_now_add=True)
-    published_at = models.DateTimeField()
+    published_at = models.DateTimeField(null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     # Function for recent publication of a book
@@ -28,7 +28,7 @@ class Chapter(models.Model):
     name = models.CharField(max_length=280, default='My Chapter Name')
     content = models.CharField(max_length=1000, default='My Content For The Chapter')
     created_at = models.DateTimeField(auto_now_add=True)
-    published_at = models.DateTimeField()
+    published_at = models.DateTimeField(null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
     votes = models.IntegerField(default=0)
 
