@@ -12,7 +12,7 @@
     {% if latest_books_list %}
     <ul>
         {% for book in latest_books_list %}
-        <li><a href="{% url 'catalog:details' book.id %}">{{ book.title }}</a></li>
+        <li><a href="{% url 'catalog:details' book.id %}">{{ book.title }}</a> - {{ book.created_at }}</li>
         {% endfor %}
     </ul>
     {% else %}

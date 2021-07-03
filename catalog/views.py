@@ -9,15 +9,17 @@ from .models import Book, Chapter
 # External imports
 from django.utils import timezone
 
-# Function to list all books
+# Function to list the five latest books
 def index(request):
-    latest_books_list = Book.objects.order_by('-created_at')[:5]
+    latest_books_list = Book.objects.filter(published_at__lte=timezone.now()).order_by('-published_at')[:5]
+
     context = {'latest_books_list': latest_books_list}
     return render(request, 'catalog/index.html', context)
 
 # Function to show all details of a specific book, including a list of chapters
 def details(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
+
     context = {'book': book}
     return render(request, 'catalog/details.html', context)
 
@@ -25,6 +27,7 @@ def details(request, book_id):
 def chapter(request, book_id, chapter_id):
     book = get_object_or_404(Book, pk=book_id)
     chapter = book.chapter_set.get(pk=chapter_id)
+
     context = {'chapter': chapter}
     return render(request, 'catalog/chapter.html', context)
 
