@@ -25,11 +25,13 @@ class Book(models.Model):
         return self.title
 
 class Chapter(models.Model):
+    # Atributes of a chapter
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     name = models.CharField(max_length=280, default='My Chapter Name')
     content = models.CharField(max_length=1000, default='My Content For The Chapter')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    votes = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

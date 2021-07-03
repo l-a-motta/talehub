@@ -9,9 +9,22 @@
 </head>
 
 <body>
-    <p>{{ chapter.book }}</p>
-    <h1>{{ chapter.name }}</h1>
-    <p>{{ chapter.content }}</p>
+    <h1>{{ chapter.book }}</h1>
+    <form action="{% url 'catalog:vote' chapter.book.id chapter.id %}" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <legend>
+                <h1>{{ chapter.name }} | {{ chapter.votes }}</h1>
+            </legend>
+            <p>{{ chapter.content }}</p>
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            <input type="radio" name="choice" id="pos" value="1">
+            <label for="pos">Like</label>
+            <input type="radio" name="choice" id="neg" value="0">
+            <label for="neg">Dislike</label>
+        </fieldset>
+        <input type="submit" value="Vote">
+    </form>
 </body>
 
 </html>
