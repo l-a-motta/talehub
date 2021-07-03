@@ -5,19 +5,16 @@
     <meta charset="utf-8">
     <meta name="author" content="Leonardo Antonetti da Motta">
     <meta name="description" content="This is a quick website to store and display your books.">
-    <title>TaleHub</title>
+    <title>{{ book.title }} - TaleHub</title>
 </head>
 
 <body>
-    {% if latest_books_list %}
+    <h1>{{ book.title }}</h1>
     <ul>
-        {% for book in latest_books_list %}
-        <li><a href="{% url 'catalog:details' book.id %}">{{ book.title }}</a></li>
+        {% for chapter in book.chapter_set.all %}
+        <li><a href="{% url 'catalog:chapter' book.id chapter.id %}">{{ chapter.name }}</a></li>
         {% endfor %}
     </ul>
-    {% else %}
-    <p>No books are available.</p>
-    {% endif %}
 </body>
 
 </html>

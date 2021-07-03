@@ -1,5 +1,5 @@
 # Django imports
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 
 # Internal imports
@@ -12,9 +12,13 @@ def index(request):
     context = {'latest_books_list': latest_books_list}
     return render(request, 'catalog/index.html', context)
 
-def detail(request, book_id):
-    return HttpResponse("You're looking at book %s." % book_id)
+def details(request, book_id):
+    book = get_object_or_404(Book, pk=book_id)
+    context = {'book': book}
+    return render(request, 'catalog/details.html', context)
 
-def chapters(request, book_id):
-    response = "You're looking at the chapters of book %s."
-    return HttpResponse(response % book_id)
+def chapter(request, book_id, chapter_id):
+    book = get_object_or_404(Book, pk=book_id)
+    chapter = book.chapter_set.get(pk=chapter_id)
+    context = {'chapter': chapter}
+    return render(request, 'catalog/chapter.html', context)
