@@ -6,6 +6,9 @@ from django.urls import reverse
 # Internal imports
 from .models import Book, Chapter
 
+# External imports
+from django.utils import timezone
+
 # Function to list all books
 def index(request):
     latest_books_list = Book.objects.order_by('-created_at')[:5]

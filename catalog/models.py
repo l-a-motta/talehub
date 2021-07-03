@@ -15,7 +15,8 @@ class Book(models.Model):
 
     # Function for recent creation of a book
     def was_created_recently(self):
-        return self.created_at >= timezone.now() - datetime.timedelta(days=1)
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.created_at <= now
 
     def __str__(self):
         return self.title
