@@ -12,6 +12,6 @@ urlpatterns = [
     path('<int:book_id>/', views.details, name='details'),
     # ex: /catalog/5/chapter/2
     path('<int:book_id>/chapter/<int:chapter_id>', views.chapter, name='chapter'),
-    # ex: /catalog/5/chapter/vote
+    # ex: /catalog/5/chapter/2/vote
     path('<int:book_id>/chapter/<int:chapter_id>/vote', views.vote, name='vote'),
 ]

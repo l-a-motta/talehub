@@ -2,12 +2,8 @@
 from django.db import models
 from django.utils import timezone
 
-# Internal imports
-
 # External imports
 import datetime
-
-# Create your models here.
 
 class Book(models.Model):
     # Atributes of a book
