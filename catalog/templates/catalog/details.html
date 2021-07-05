@@ -11,7 +11,7 @@
 <body>
     <h1>{{ book.title }}</h1>
     <ul>
-        {% for chapter in book.chapter_set.all %}
+        {% for chapter in chapters %}
         <li><a href="{% url 'catalog:chapter' book.id chapter.id %}">{{ chapter.name }}</a></li>
         {% endfor %}
     </ul>

@@ -1,4 +1,3 @@
-- Change site so user cannot access unpublished chapter or book by guessing the id in the URL. 
-    For this, change catalog:views.py so the function for details() and chapter() filters out unpublished works (only accepts publish dates of the past, not blank nor future dates)
+- Check how to test the project with Selenium: it's like a robot goes and checks your website live, pretty cool
 
-- To add...
+- Check how to use the F() function in the vote() function at catalog's view
