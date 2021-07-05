@@ -7,7 +7,7 @@ from .models import Book, Chapter
 # External imports
 from django.utils import timezone
 
-# Function to list the five latest books
+# * Function to list the five latest books
 def index(request):
     # We get a list (maximum of 10 books as of this version) with all books that have 
     # been published before now, ordered by their publishing time
@@ -16,7 +16,7 @@ def index(request):
     context = {'latest_books_list': latest_books_list}
     return render(request, 'catalog/index.html', context)
 
-# Function to show all details of a specific book, including a list of chapters
+# * Function to show all details of a specific book, including a list of chapters
 def details(request, book_id):
     try:
         # The book needs the right ID, and to be published before the moment of lookup.
@@ -31,7 +31,7 @@ def details(request, book_id):
     context = {'book': book, 'chapters': chapters}
     return render(request, 'catalog/details.html', context)
 
-# Function to view a specific chapter
+# * Function to view a specific chapter
 def chapter(request, book_id, chapter_id):
     try:
         # The book needs the right ID, and to be published before now().
@@ -46,7 +46,7 @@ def chapter(request, book_id, chapter_id):
     context = {'chapter': chapter}
     return render(request, 'catalog/chapter.html', context)
 
-# Function to vote in a specific chapter
+# * Function to vote in a specific chapter
 def vote(request, book_id, chapter_id):
     try:
         book = Book.objects.get(pk=book_id, published_at__lte=timezone.now())
@@ -67,9 +67,8 @@ def vote(request, book_id, chapter_id):
             chapter.votes += 1
         elif selected_choice == "0":
             chapter.votes -= 1
-        chapter.save() # Look into F(), at Django docs. Better performance
+        chapter.save() # TODO: Look into F(), at Django docs. Better performance
 
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
+        # ! Always return an HttpResponseRedirect after successfully dealing with POST data. 
+        # This prevents data from being posted twice if a user hits the Back button.
         return HttpResponseRedirect(reverse('catalog:details', args=(book.id,)))

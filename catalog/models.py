@@ -1,7 +1,6 @@
 # Django imports
 from django.db import models
 from django.utils import timezone
-
 # External imports
 import datetime
 
