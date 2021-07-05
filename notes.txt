@@ -1,0 +1,5 @@
+You can run tests with "coverage". Just use the command: 
+coverage run --source='.' manage.py test name_of_app
+
+To see the extent of your tests, use the command:
+coverage report
