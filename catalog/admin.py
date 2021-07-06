@@ -19,6 +19,7 @@ class BookAdmin(admin.ModelAdmin):
     inlines = [ChapterInline] # Adds the class ChapterInLine to the specific table of a Book
     list_display = ('title', 'created_at', 'published_at', 'was_published_recently') # Defines values shown in the general table
     list_filter = ['created_at', 'published_at'] # Defines filters to be shown in the general table
+    search_fields = ['title'] # Defines the search box of the general table
 
 # * Class defining the model Chapter for the admin
 class ChapterAdmin(admin.ModelAdmin):
@@ -30,6 +31,7 @@ class ChapterAdmin(admin.ModelAdmin):
     ]
     list_display = ('name', 'book', 'created_at', 'published_at', 'was_published_recently') # Defines values shown in the general table
     list_filter = ['created_at', 'published_at'] # Defines filters to be shown in the general table
+    search_fields = ['name'] # Defines the search box of the general table
 
 # * Registering the models to the admin page
 admin.site.register(Book, BookAdmin)
