@@ -1,14 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="no-js">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Leonardo Antonetti da Motta">
-    <meta name="description" content="This is a quick website to store and display your books.">
+
+    {% load static %}
+
+    <!-- Details of the page for the user -->
     <title>TaleHub</title>
+    <meta name="description" content="A hub for all your writing and reading needs.">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="theme-color" content="#FF00FF">
+
+    <!-- SEO and social media adaptation -->
+    <meta property="og:title" content="Unique page title - My Site">
+    <meta property="og:description" content="Page description">
+    <meta property="og:image" content="https://www.mywebsite.com/image.jpg">
+    <meta property="og:image:alt" content="Image description">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:url" content="https://www.mywebsite.com/page">
+    <link rel="canonical" href="https://www.mywebsite.com/page">
+
+    <!-- CSS and style files -->
+    <link rel="stylesheet" type="text/css" href="{% static 'catalog/style.css' %}">
+
+    <!-- Script files -->
+
+    <!-- External resources and CDNs -->
+
 </head>
 
 <body>
+    <!-- Content -->
     {% if latest_books_list %}
     <ul>
         {% for book in latest_books_list %}
