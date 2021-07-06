@@ -64,9 +64,9 @@ def vote(request, book_id, chapter_id):
     else:
         # Check for the selected vote, 1 for positive and 0 for negative vote
         if selected_choice == "1":
-            chapter.votes += 1
+            chapter.score += 1
         elif selected_choice == "0":
-            chapter.votes -= 1
+            chapter.score -= 1
         chapter.save() # TODO: Look into F(), at Django docs. Better performance
 
         # ! Always return an HttpResponseRedirect after successfully dealing with POST data. 

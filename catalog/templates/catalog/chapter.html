@@ -14,7 +14,7 @@
         {% csrf_token %}
         <fieldset>
             <legend>
-                <h1>{{ chapter.name }} | {{ chapter.votes }}</h1>
+                <h1>{{ chapter.name }} | {{ chapter.score }}</h1>
             </legend>
             <p>{{ chapter.content }}</p>
             {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}

@@ -1,6 +1,7 @@
 # Django imports
 from django.db import models
 from django.utils import timezone
+from django.contrib import admin
 # External imports
 import datetime
 
@@ -12,6 +13,13 @@ class Book(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     published_at = models.DateTimeField(null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    # Admin page definitions
+    @admin.display(
+        boolean=True,
+        ordering='published_at',
+        description='Published recently?',
+    )# ? For more info (https://docs.djangoproject.com/en/3.2/ref/contrib/admin/#django.contrib.admin.ModelAdmin.list_display)
 
     # Function for recent publication of a book
     def was_published_recently(self):
@@ -29,7 +37,14 @@ class Chapter(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     published_at = models.DateTimeField(null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
-    votes = models.IntegerField(default=0)
+    score = models.IntegerField(default=0)
+
+    # Admin page definitions
+    @admin.display(
+        boolean=True,
+        ordering='published_at',
+        description='Published recently?',
+    )# ? For more info (https://docs.djangoproject.com/en/3.2/ref/contrib/admin/#django.contrib.admin.ModelAdmin.list_display)
 
     # Function for recent publication of a chapter
     def was_published_recently(self):
