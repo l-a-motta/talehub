@@ -46,6 +46,8 @@
     {% else %}
     <p>No books are available.</p>
     {% endif %}
+    <hr>
+    <p><a href="{% url 'catalog:add-book' %}">Add a new book</a></p>
 </body>
 
 </html>

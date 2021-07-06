@@ -2,10 +2,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.urls import reverse
+from django.utils import timezone
 # Internal imports
 from .models import Book, Chapter
+from .forms import BookForm
 # External imports
-from django.utils import timezone
+
 
 # * Function to list the five latest books
 def index(request):
@@ -54,7 +56,6 @@ def vote(request, book_id, chapter_id):
         # This is just one chapter so it needs the ID to differentiate from the others in the 
         # book's chapter_set, and also the publishing time check
         chapter = book.chapter_set.get(pk=chapter_id, published_at__lte=timezone.now())
-
     except (Book.DoesNotExist, Chapter.DoesNotExist) as e:
         raise Http404("Error: ", e)
 
@@ -75,3 +76,23 @@ def vote(request, book_id, chapter_id):
         # ! Always return an HttpResponseRedirect after successfully dealing with POST data. 
         # This prevents data from being posted twice if a user hits the Back button.
         return HttpResponseRedirect(reverse('catalog:details', args=(book.id,)))
+
+# * Function to add a new Book through Django's automated forms
+def add_book(request):
+    # If this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # Create a form instance and populate it with data from the request, to check for validty:
+        form = BookForm(request.POST)
+        # Check whether it's valid:
+        if form.is_valid():
+            # Process the data in form.cleaned_data as required
+            new_book = Book.objects.create(title=request.POST['title'], published_at=request.POST['published_at'])
+            new_book.save()
+            # Redirect to a new URL:
+            return HttpResponseRedirect(reverse('catalog:index'))
+    # If a GET (or any other method) we'll create a blank form
+    else:
+        form = BookForm()
+    
+    context = {'form': form}
+    return render(request, 'catalog/add_book.html', context)

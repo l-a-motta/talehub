@@ -14,4 +14,6 @@ urlpatterns = [
     path('<int:book_id>/chapter/<int:chapter_id>', views.chapter, name='chapter'),
     # ex: /catalog/5/chapter/2/vote
     path('<int:book_id>/chapter/<int:chapter_id>/vote', views.vote, name='vote'),
+    # ex: /add-book/
+    path('add-book/', views.add_book, name='add-book'),
 ]
