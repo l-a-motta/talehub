@@ -19,7 +19,7 @@ def index(request):
 # * Function to show all details of a specific book, including a list of chapters
 def details(request, book_id):
     try:
-        # The book needs the right ID, and to be published before the moment of lookup.
+        # The book needs the right ID, and to be published before now().
         book = Book.objects.get(pk=book_id, published_at__lte=timezone.now())
         # The list of chapters already come from the book's chapter_set, so it only needs 
         # to filter the chapters based on publishing time
@@ -49,14 +49,17 @@ def chapter(request, book_id, chapter_id):
 # * Function to vote in a specific chapter
 def vote(request, book_id, chapter_id):
     try:
+        # The book needs the right ID, and to be published before now().
         book = Book.objects.get(pk=book_id, published_at__lte=timezone.now())
+        # This is just one chapter so it needs the ID to differentiate from the others in the 
+        # book's chapter_set, and also the publishing time check
         chapter = book.chapter_set.get(pk=chapter_id, published_at__lte=timezone.now())
 
     except (Book.DoesNotExist, Chapter.DoesNotExist) as e:
         raise Http404("Error: ", e)
 
     try:
-        selected_choice = request.POST['choice']
+        selected_choice = request.POST['choice'] # Gets the choice from the POST data
     except (KeyError):
         # Redisplay the question voting form because there was no vote (KeyError from lack of vote in POST).
         context = {'chapter': chapter, 'error_message': "You didn't vote."}
