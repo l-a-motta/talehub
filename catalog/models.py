@@ -2,6 +2,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib import admin
+from django.urls import reverse
 # Internal imports
 # External imports
 import datetime
@@ -27,6 +28,10 @@ class Book(models.Model):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.published_at <= now
 
+    # Function to show the absolute URL for the specific book
+    def get_absolute_url(self):
+        return reverse('catalog:details', args=[self.id])
+
     def __str__(self):
         return self.title
 
@@ -51,6 +56,10 @@ class Chapter(models.Model):
     def was_published_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.published_at <= now
+
+    # Function to show the absolute URL for the specific chapter
+    def get_absolute_url(self):
+        return reverse('catalog:chapter', args=[self.book.id, self.id])
 
     def __str__(self):
         return self.name

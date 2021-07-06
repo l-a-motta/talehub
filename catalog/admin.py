@@ -17,7 +17,7 @@ class BookAdmin(admin.ModelAdmin):
         ('PUBLISHING INFORMATION', {'fields': ['published_at'], 'classes': ['collapse']}),
     ]
     inlines = [ChapterInline] # Adds the class ChapterInLine to the specific table of a Book
-    list_display = ('title', 'created_at', 'published_at', 'was_published_recently') # Defines values shown in the general table
+    list_display = ('title', 'created_at', 'published_at', 'was_published_recently', 'get_absolute_url') # Defines values shown in the general table
     list_filter = ['created_at', 'published_at'] # Defines filters to be shown in the general table
     search_fields = ['title'] # Defines the search box of the general table
 
@@ -29,7 +29,7 @@ class ChapterAdmin(admin.ModelAdmin):
         ('PUBLISHING INFORMATION', {'fields': ['published_at'], 'classes': ['collapse']}),
         ('SCORE INFORMATION', {'fields': ['score']}),
     ]
-    list_display = ('name', 'book', 'created_at', 'published_at', 'was_published_recently') # Defines values shown in the general table
+    list_display = ('name', 'book', 'created_at', 'published_at', 'was_published_recently', 'get_absolute_url') # Defines values shown in the general table
     list_filter = ['created_at', 'published_at'] # Defines filters to be shown in the general table
     search_fields = ['name'] # Defines the search box of the general table
 
