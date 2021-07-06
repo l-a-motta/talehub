@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Leonardo Antonetti da Motta">
+    <meta name="description" content="This is a quick website to store and display your books.">
+    <title>{{ book.title }} - TaleHub</title>
+</head>
+
+<body>
+    <h1>{{ book.title }}</h1>
+    <ul>
+        {% for chapter in chapters %}
+        <li><a href="{% url 'catalog:chapter' book.id chapter.id %}">{{ chapter.name }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>

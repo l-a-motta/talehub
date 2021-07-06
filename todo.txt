@@ -1,0 +1,3 @@
+- Check how to test the project with Selenium: it's like a robot goes and checks your website live, pretty cool
+
+- Check how to use the F() function in the vote() function at catalog's view
