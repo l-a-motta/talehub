@@ -1,8 +1,8 @@
 # Django imports
 from django.contrib import admin
-
 # Internal imports
 from .models import Book, Chapter
+# External imports
 
 # * Class for displaying chapters inside of the book entry, in TabularInLine form
 class ChapterInline(admin.TabularInline):

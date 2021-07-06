@@ -2,10 +2,8 @@
 from django.test import TestCase
 from django.utils import timezone
 from django.urls import reverse
-
 # Internal imports
 from .models import Book
-
 # External imports
 import datetime
 
